@@ -7,6 +7,11 @@
         <th></th>
     </tr>
 
+    <tr>
+        <%= @location_weather.today_weather %>
+        <%= @location_weather.city_name %>
+    </tr>
+
     <% @articles.each do |article| %>
         <tr>
             <td><%= article.title %></td>
