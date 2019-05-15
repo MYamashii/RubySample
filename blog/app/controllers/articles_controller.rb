@@ -14,7 +14,9 @@ class ArticlesController < ApplicationController
     location_weather_list = weather_collection.get_all_location_weather
     # weather_count = location_weather_list.count
 
-    @location_weather = location_weather_list.pop
+    # @location_weather = location_weather_list.pop
+    @location_weather_arr = location_weather_list.get_list
+    @location_weather_arr.reverse!
   end
 
   def show

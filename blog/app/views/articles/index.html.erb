@@ -1,16 +1,15 @@
 <h1>Listing articles</h1>
 <%= link_to 'New article', new_article_path %>
 <table>
-    <tr>
-        <th>Title</th>
-        <th>Text</th>
-        <th></th>
-    </tr>
+    <% @location_weather_arr.each do |location_weather| %>
+        <tr>
+            <td><%= location_weather.city_name %></td>        
+            <td><%= location_weather.today_weather %></td>
 
-    <tr>
-        <%= @location_weather.today_weather %>
-        <%= @location_weather.city_name %>
-    </tr>
+        </tr>
+    <% end %>
+
+
 
     <% @articles.each do |article| %>
         <tr>

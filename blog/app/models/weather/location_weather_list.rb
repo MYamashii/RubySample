@@ -17,4 +17,8 @@ class LocationWeatherList
   def pop
     return @array.pop
   end
+
+  def get_list
+    return @array
+  end
 end

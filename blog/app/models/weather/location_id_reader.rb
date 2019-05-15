@@ -1,6 +1,7 @@
 require 'json'
 require_relative 'location.rb'
 require_relative 'location_list.rb'
+require_relative 'main_city_reader.rb'
 
 class LocationIdReader
   # return value : LocationList
@@ -11,18 +12,24 @@ class LocationIdReader
     end
 
     location_list = LocationList.new
+    reader = MainCityReader.new
+    reader.read
     area = @parse_text['area']
     for area_no in 0..area.count - 1
       prefs = area[area_no]['prefs']
       for pref_no in 0..prefs.count - 1
         city = prefs[pref_no]['city']
         for city_no in 0..city.count - 1
-          location = Location.new
-          location.area_name = area[area_no]['name']
-          location.pref_name = prefs[pref_no]['name']
-          location.location_name = city[city_no]['name']
-          location.id = city[city_no]['id']
-          location_list.add(location)
+          city_name = city[city_no]['name']
+          if reader.contain?(city_name)
+
+            location = Location.new
+            location.area_name = area[area_no]['name']
+            location.pref_name = prefs[pref_no]['name']
+            location.location_name = city_name
+            location.id = city[city_no]['id']
+            location_list.add(location)
+          end
         end
       end
     end
