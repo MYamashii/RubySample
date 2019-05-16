@@ -5,16 +5,38 @@ require_relative 'main_city_reader.rb'
 
 class LocationIdReader
   # return value : LocationList
-  def read
-    file_path = File.expand_path('../config/locationId.json', __FILE__)
-    File.open(file_path, 'r') do |text|
-      @parse_text = JSON.parse(text.read)
-    end
+  def read_all_location_id
+    parse_text = read_location_id
 
     location_list = LocationList.new
     reader = MainCityReader.new
     reader.read
-    area = @parse_text['area']
+    area = parse_text['area']
+    for area_no in 0..area.count - 1
+      prefs = area[area_no]['prefs']
+      for pref_no in 0..prefs.count - 1
+        city = prefs[pref_no]['city']
+        for city_no in 0..city.count - 1
+          location = Location.new
+          location.area_name = area[area_no]['name']
+          location.pref_name = prefs[pref_no]['name']
+          location.location_name = city[city_no]['name']
+          location.id = city[city_no]['id']
+          location_list.add(location)
+        end
+      end
+    end
+
+    return location_list
+  end
+
+  def read_main_location_id
+    parse_text = read_location_id
+
+    location_list = LocationList.new
+    reader = MainCityReader.new
+    reader.read
+    area = parse_text['area']
     for area_no in 0..area.count - 1
       prefs = area[area_no]['prefs']
       for pref_no in 0..prefs.count - 1
@@ -22,7 +44,6 @@ class LocationIdReader
         for city_no in 0..city.count - 1
           city_name = city[city_no]['name']
           if reader.contain?(city_name)
-
             location = Location.new
             location.area_name = area[area_no]['name']
             location.pref_name = prefs[pref_no]['name']
@@ -35,5 +56,17 @@ class LocationIdReader
     end
 
     return location_list
+  end
+
+  private
+
+  def read_location_id
+    file_path = File.expand_path('config/locationId.json', __dir__)
+    parse_text = ''
+    File.open(file_path, 'r') do |text|
+      parse_text = JSON.parse(text.read)
+    end
+
+    return parse_text
   end
 end

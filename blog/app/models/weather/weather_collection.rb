@@ -12,9 +12,9 @@ class WeatherCollection
 
   # 全国の各地点IDから天気を取得します。
   # 戻り値：LocationWeatherList
-  def get_all_location_weather
+  def get_main_location_weather
     id_reader = LocationIdReader.new
-    location_list = id_reader.read
+    location_list = id_reader.read_main_location_id
 
     return create_weather_location_list(location_list)
   end

@@ -12,9 +12,9 @@ class TestWeatherCollection < Test::Unit::TestCase
 
     weather_collection = WeatherCollection.new(creator, reader)
 
-    location_weather_list = weather_collection.get_all_location_weather
+    location_weather_list = weather_collection.get_main_location_weather
 
-    assert_equal 142, location_weather_list.count
+    assert_equal 21, location_weather_list.count
   end
 
   def test_get_weather_date
@@ -23,7 +23,7 @@ class TestWeatherCollection < Test::Unit::TestCase
 
     weather_collection = WeatherCollection.new(creator, reader)
 
-    location_weather_list = weather_collection.get_all_location_weather
+    location_weather_list = weather_collection.get_main_location_weather
     location_count = location_weather_list.count
     for i in 0..location_count - 1
       location_weather = location_weather_list.pop
