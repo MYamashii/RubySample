@@ -1,3 +1,3 @@
-require './worker'
+require './async_adapter'
 
-Delayed::Worker.delay_job?
+AsyncAdapter.new.enqueue

@@ -6,3 +6,5 @@ git_source(:github) do |repo_name|
 end
 
 ruby '2.7.4'
+
+gem 'debug'
