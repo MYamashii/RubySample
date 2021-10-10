@@ -10,16 +10,18 @@ class AsyncAdapter
   end
 
   class JobWrapper
-    def perform
+    def perform(hoge)
       puts '---JobWrapper#perform---'
+      puts hoge.inspect
     end
   end
 
   class Scheduler
     def enqueue
-      # job = JobWrapper.new
-      job = AsyncAdapter.new
-      RubyThreadPoolExecutor.new.post(job, &:perform)
+      job = JobWrapper.new
+      arguments = 'do something'
+      # job = AsyncAdapter.new
+      RubyThreadPoolExecutor.new.post(job, arguments, &:perform)
     end
   end
 end
