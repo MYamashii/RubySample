@@ -13,5 +13,4 @@ jobs:
         with:
           label_name: 'merged in develop'
           target_branch: 'develop'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ github.token }}
