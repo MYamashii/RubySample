@@ -1,0 +1,8 @@
+name: Merge branch with labeled
+on: [push]
+jobs:
+  show-ruby-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ruby version
+        run: ruby --version
