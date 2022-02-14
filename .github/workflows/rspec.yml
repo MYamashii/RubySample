@@ -1,0 +1,31 @@
+on: [pull_request]
+
+jobs:
+  job:
+    runs-on: ubuntu-latest
+    name: Run spec
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.4
+          bundler-cache: true
+
+      - name: Test with RSpec
+        run: |
+          bundle exec rspec
+
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          version: v0.1.15
+          files: ./coverage/coverage.xml
+          flags: unittests # optional
+          name: ruby-sample-for-codecov # optional
+          fail_ci_if_error: true # optional (default = false)
+          verbose: true
