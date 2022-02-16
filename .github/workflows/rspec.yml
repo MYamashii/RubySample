@@ -22,7 +22,7 @@ jobs:
       - name: Upload coverage reports
         uses: codecov/codecov-action@v2
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          # token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/coverage.xml
           flags: unittests # optional
           name: ruby-sample-for-codecov # optional
