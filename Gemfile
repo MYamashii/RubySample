@@ -8,3 +8,10 @@ end
 ruby '2.7.4'
 
 gem 'debug'
+gem 'rspec'
+
+# Simplecov to generate coverage info
+gem 'simplecov', require: false
+
+# Simplecov-cobertura to generate an xml coverage file which can then be uploaded to Codecov
+gem 'simplecov-cobertura'
